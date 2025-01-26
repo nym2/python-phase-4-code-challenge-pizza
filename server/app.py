@@ -64,7 +64,7 @@ class RestaurantPizzasResource(Resource):
 
             # Validate price
             if price is None or not (1 <= price <= 30):
-                return {"errors": ["Price must be between 1 and 30."]}, 400
+                return {"errors": ["validation errors"]}, 400  # Change the error message here
 
             # Check for associated Pizza and Restaurant
             pizza = Pizza.query.filter_by(id=pizza_id).first()
@@ -82,7 +82,8 @@ class RestaurantPizzasResource(Resource):
 
             return restaurant_pizza.to_dict(rules=("pizza", "restaurant")), 201
         except ValueError:
-            return {"errors": ["validation errors"]}, 400
+            return {"errors": ["validation errors"]}, 400  # Catch ValueError and return "validation errors"
+
 
 
 # Register routes
